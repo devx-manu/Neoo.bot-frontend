@@ -17,105 +17,75 @@
       align-items: center;
       flex-direction: column;
       height: 100vh;
+      text-align: center;
+      position: relative;
     }
 
-   h1 {
-  font-size: 3rem;
-  margin-top: -330px;
-  text-align: center; /* 'top' is not a valid value, center it instead */
-  z-index: 1;
+    /* 🏷️ Top Center Container */
+    .title-container {
+      position: absolute;
+      top: 5%; /* 👈 always near top of screen */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+      text-align: center;
+    }
 
-  /* 🌌 Glassmorphism Effect */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
-  padding: 10px 20px;
- 
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 8px 16px;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #09f, 0 0 40px #0ff;
+      animation: glowPulse 2s infinite alternate ease-in-out;
+    }
 
-  /* 🌈 Neon Glow */
-  color: #0ff;
-  text-shadow: 
-    0 0 5px #0ff,
-    0 0 10px #0ff,
-    0 0 20px #09f,
-    0 0 40px #0ff;
+    @keyframes glowPulse {
+      0% {
+        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #09f, 0 0 40px #0ff;
+        transform: scale(1);
+      }
+      100% {
+        text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #09f, 0 0 60px #0ff;
+        transform: scale(1.05);
+      }
+    }
 
-  /* ✨ Animation */
-  animation: glowPulse 2s infinite alternate ease-in-out;
-}
+    h3 {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      max-width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      border-radius: 10px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      text-shadow: 0 0 5px #09f, 0 0 10px #0ff;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards, typing 3s steps(40) 1s forwards;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #0ff;
+    }
 
-/* 🔄 Glow Pulse Animation */
-@keyframes glowPulse {
-  0% {
-    text-shadow: 
-      0 0 5px #0ff,
-      0 0 10px #0ff,
-      0 0 20px #09f,
-      0 0 40px #0ff;
-    transform: scale(1);
-  }
-  100% {
-    text-shadow: 
-      0 0 10px #0ff,
-      0 0 20px #0ff,
-      0 0 40px #09f,
-      0 0 60px #0ff;
-    transform: scale(1.05);
-  }
-}
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
 
-h3 {
-  font-size: 1.5rem;
-  max-width: 1000px;
-  margin: 10px auto;
-  text-align: center;
-  z-index: 1;
-
-  /* 🌌 Glassmorphism Effect */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(6px);
-  border-radius: 10px;
-  padding: 8px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-
-  /* ✨ Softer Neon Glow */
-  color: #fff;
-  text-shadow: 
-    0 0 5px #09f,
-    0 0 10px #0ff;
-
-  /* 🎬 Smooth Fade + Type Animation */
-  opacity: 0;
-  animation: fadeIn 2s ease forwards, typing 3s steps(40) 1s forwards;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid #0ff; /* typing cursor */
-}
-
-/* 🔄 Fade-in */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* ⌨️ Typing Effect */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-
-
-    /* ☀️ Solar System Background */
+    /* 🌌 Solar System stays in center */
     .solar-system {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -124,8 +94,8 @@ h3 {
     }
 
     .sun {
-      width: 100px;
-      height: 100px;
+      width: clamp(60px, 10vw, 100px);
+      height: clamp(60px, 10vw, 100px);
       background: radial-gradient(circle, #ffcc00, #ff6600);
       border-radius: 50%;
       box-shadow: 0 0 50px 20px rgba(255, 204, 0, 0.6);
@@ -145,49 +115,28 @@ h3 {
     }
 
     .planet {
-      width: 20px;
-      height: 20px;
+      width: clamp(12px, 2vw, 20px);
+      height: clamp(12px, 2vw, 20px);
       border-radius: 50%;
-      background: cyan;
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translateX(200px);
       box-shadow: 0 0 10px cyan;
     }
 
-  
-
-    /* 💬 Speech bubble */
-    .speech {
-      margin-top: 15px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.2);
-      opacity: 0;
-      animation: fadeIn 1s ease-in forwards;
-      animation-delay: 3s;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* 🚀 Buttons */
     .buttons {
       position: absolute;
-      bottom: 40px;
+      bottom: 5%;
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
     }
 
     .buttons a {
       text-decoration: none;
-      padding: 12px 30px;
-      font-size: 1rem;
+      padding: 10px 20px;
+      font-size: clamp(0.8rem, 2vw, 1rem);
       border-radius: 30px;
       background: linear-gradient(45deg, #0ff, #09f, #f0f);
       color: white;
@@ -201,37 +150,46 @@ h3 {
       transform: scale(1.1);
       box-shadow: 0 0 40px #0ff, 0 0 60px #f0f;
     }
+
+    /* Responsive orbit sizes */
+    @media (max-width: 768px) {
+      .orbit:nth-child(2) { width: 200px; height: 200px; }
+      .orbit:nth-child(3) { width: 300px; height: 300px; }
+      .orbit:nth-child(4) { width: 400px; height: 400px; }
+      .orbit:nth-child(5) { width: 500px; height: 500px; }
+    }
+
+    @media (min-width: 769px) {
+      .orbit:nth-child(2) { width: 300px; height: 300px; }
+      .orbit:nth-child(3) { width: 500px; height: 500px; }
+      .orbit:nth-child(4) { width: 700px; height: 700px; }
+      .orbit:nth-child(5) { width: 900px; height: 900px; }
+    }
   </style>
 </head>
 <body>
-    <div>
+
+  <!-- 🏷️ Title Section (Fixed at Top) -->
+  <div class="title-container">
     <h1>Neoo - The Bot</h1>
     <h3>Your futuristic AI assistant that delivers top dev news at 9AM & 6PM every day</h3>
-    </div>
-  <!-- 🌌 Solar System Background -->
-  <div class="solar-system">
-    <div class="sun"></div>
-    <div class="orbit" style="width: 300px; height: 300px;">
-      <div class="planet" style="background: #00ffff; transform: translateX(150px);"></div>
-    </div>
-    <div class="orbit" style="width: 500px; height: 500px; animation-duration: 30s;">
-      <div class="planet" style="background: #ff00ff; transform: translateX(250px);"></div>
-    </div>
-    <div class="orbit" style="width: 700px; height: 700px; animation-duration: 40s;">
-      <div class="planet" style="background: #00ff00; transform: translateX(350px);"></div>
-    </div>
-    <div class="orbit" style="width: 900px; height: 900px; animation-duration: 50s;">
-      <div class="planet" style="background: #e5ff00; transform: translateX(450px);"></div>
-    </div>
   </div>
 
- 
+  <!-- 🌌 Solar System in Background -->
+  <div class="solar-system">
+    <div class="sun"></div>
+    <div class="orbit"><div class="planet" style="background:#00ffff; transform:translateX(150px);"></div></div>
+    <div class="orbit" style="animation-duration:30s;"><div class="planet" style="background:#ff00ff; transform:translateX(250px);"></div></div>
+    <div class="orbit" style="animation-duration:40s;"><div class="planet" style="background:#00ff00; transform:translateX(350px);"></div></div>
+    <div class="orbit" style="animation-duration:50s;"><div class="planet" style="background:#e5ff00; transform:translateX(450px);"></div></div>
+  </div>
 
   <!-- 🚀 Buttons -->
   <div class="buttons">
     <a href="https://t.me/Neoo67_bot" target="_blank">Visit Bot</a>
     <a href="https://github.com/devx-manu/Neoo.bot.git" target="_blank">Visit GitHub</a>
-    <a href="https://www.linkedin.com/in/dev-kannadiga-74385037b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/dev-kannadiga-74385037b" target="_blank">LinkedIn</a>
   </div>
+
 </body>
 </html>
